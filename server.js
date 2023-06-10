@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('express');
 const bodyParser = require('body-parser');
+const env = require('dotenv').config()
 
 const app = express();
 app.use(express.static('public'));
@@ -57,8 +58,8 @@ app.post('/checkout', async (req, res, next) => {
                 quantity: item.quantity,
             })), 
             mode: "payment",
-            success_url: "http://localhost:4242/success.html",
-            cancel_url: "http://localhost:4242/cancel.html"
+            success_url: process.env.API_URL + "success.html",
+            cancel_url: process.env.API_URL + "cancel.html"
         });        
         res
             .status(200)
